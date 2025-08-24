@@ -3,7 +3,7 @@ using NouteAPI.Models;
 using NouteAPI.Models.NouteDbContext;
 using System.Collections.Generic;
 
-namespace NouteAPI.Get
+namespace NouteAPI.Features.Get
 {
     public class GetNouteHandler(NouteDbContext db) : IRequestHandler<GetNouteQuerty, IEnumerable<Noute>>
     {

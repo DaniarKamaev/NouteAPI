@@ -1,7 +1,8 @@
-using NouteAPI.Create;
-using NouteAPI.Get;
 using MediatR;
 using NouteAPI.Models.NouteDbContext;
+using NouteAPI.Features.Get;
+using NouteAPI.Features.Create;
+using NouteAPI.Features.Edit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,5 +29,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.MapCreateNouteEndPoint();
 app.MapGetNoute();
+app.MapEditNoute();
 
 app.Run();

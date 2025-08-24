@@ -1,5 +1,6 @@
 ﻿using MediatR;
-namespace NouteAPI.Create
+
+namespace NouteAPI.Features.Create
 {
     public record CreateNoute(
         Guid ounerId,

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-namespace NouteAPI.Create
+namespace NouteAPI.Features.Create
 {
     public static class CreateNouteEndPoint
     {

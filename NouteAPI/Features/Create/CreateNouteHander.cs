@@ -2,7 +2,7 @@
 using NouteAPI.Models;
 using NouteAPI.Models.NouteDbContext;
 
-namespace NouteAPI.Create
+namespace NouteAPI.Features.Create
 {
     public class CreateNouteHander(NouteDbContext db) : IRequestHandler<CreateNoute, CreateNouteResponse>
     {
