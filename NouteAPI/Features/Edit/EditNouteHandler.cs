@@ -12,8 +12,8 @@ namespace NouteAPI.Features.Edit
         public async Task<EditNouteResponse> Handle(EditNoute request, CancellationToken cancellationToken)
         {
 
-            /*
-            var noute = db.Nouts.FirstOrDefault(a => a.id == request.id);
+            
+            var noute = db.nouteSet.FirstOrDefault(a => a.id == request.id);
 
             if (noute == null)
             {
@@ -30,11 +30,11 @@ namespace NouteAPI.Features.Edit
                 throw new Exception($"Заметки нет текста");
             }
 
-            noute.date = DateTime.Now;
+            noute.date = DateTime.UtcNow;
             noute.lable = request.lable;
             noute.text = request.text;
-            */
-            //db.SaveChangesAsync();
+            
+            await db.SaveChangesAsync();
             return new EditNouteResponse(request.id, $"Заметка с id {request.id} успешно отредактированна");
 
 
