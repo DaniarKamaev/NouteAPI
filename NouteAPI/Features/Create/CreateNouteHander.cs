@@ -12,12 +12,13 @@ namespace NouteAPI.Features.Create
             {
                 id = Guid.NewGuid(),
                 ounerId = request.ounerId,
-                date = DateTime.Now,
+                date = DateTime.UtcNow,
                 lable = request.lable,
                 text = request.text
             };
-            db.Nouts.Add(noute);
+            await db.AddAsync(noute);
             await db.SaveChangesAsync();
+            Console.WriteLine("Заметка созданна");
 
             return new CreateNouteResponse(noute.id, $"Заметка с id {noute.id} успешно создана");
         }

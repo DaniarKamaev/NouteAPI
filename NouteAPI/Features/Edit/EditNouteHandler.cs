@@ -11,7 +11,8 @@ namespace NouteAPI.Features.Edit
     {
         public async Task<EditNouteResponse> Handle(EditNoute request, CancellationToken cancellationToken)
         {
-            
+
+            /*
             var noute = db.Nouts.FirstOrDefault(a => a.id == request.id);
 
             if (noute == null)
@@ -32,8 +33,9 @@ namespace NouteAPI.Features.Edit
             noute.date = DateTime.Now;
             noute.lable = request.lable;
             noute.text = request.text;
-            db.SaveChangesAsync();
-            return new EditNouteResponse(noute.id, $"Заметка с id {noute.id} успешно отредактированна");
+            */
+            //db.SaveChangesAsync();
+            return new EditNouteResponse(request.id, $"Заметка с id {request.id} успешно отредактированна");
 
 
         }

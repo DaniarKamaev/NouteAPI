@@ -1,17 +1,25 @@
 using MediatR;
-using NouteAPI.Models.NouteDbContext;
-using NouteAPI.Features.Get;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using NouteAPI.Features.Create;
 using NouteAPI.Features.Edit;
+using NouteAPI.Features.Get;
+using NouteAPI.Models.NouteDbContext;
+
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<NouteDbContext>();
+//builder.Services.AddSingleton<NouteDbContext>();
+builder.Services.AddDbContext<NouteDbContext>(
+    options =>
+    {
+        options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(NouteDbContext)));
+    });
 
 builder.Services.AddMediatR(cfg =>
 {
@@ -24,6 +32,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<NouteDbContext>();
+    dbContext.Database.Migrate();
 }
 
 app.UseAuthorization();
