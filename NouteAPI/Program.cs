@@ -1,14 +1,26 @@
+using FluentValidation;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 using NouteAPI.Features.Create;
 using NouteAPI.Features.Edit;
 using NouteAPI.Features.Get;
 using NouteAPI.Models.NouteDbContext;
-
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllers();

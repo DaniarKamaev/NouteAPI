@@ -2,6 +2,5 @@
 {
     public record CreateNouteResponse(
         Guid id,
-        string Message
-        );
+        string Message);
 }

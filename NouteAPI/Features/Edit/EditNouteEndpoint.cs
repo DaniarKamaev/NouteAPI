@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 namespace NouteAPI.Features.Edit
 {
@@ -8,8 +9,15 @@ namespace NouteAPI.Features.Edit
         {
             app.MapPost("api/noute/edit", async (
                 [FromBody] EditNoute editNoute,
+                IValidator<EditNoute> validator,
                 IMediator mediator) =>
             {
+                var validationResult = await validator.ValidateAsync(editNoute);
+
+                if (!validationResult.IsValid)
+                {
+                    return Results.ValidationProblem(validationResult.ToDictionary());
+                }
                 var response = await mediator.Send(editNoute);
                 return Results.Ok(response);
             });
