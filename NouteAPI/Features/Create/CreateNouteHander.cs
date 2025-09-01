@@ -22,7 +22,7 @@ namespace NouteAPI.Features.Create
 
             if (existingNote != null) 
             {
-                return new CreateNouteResponse(noute.id, $"Заметки не могут иметь одинаковые имена");
+                return new CreateNouteResponse(noute.id, "Заметки не могут иметь одинаковые имена");
             }
 
             await db.AddAsync(noute);

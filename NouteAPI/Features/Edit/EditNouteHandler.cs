@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NouteAPI.Features.Create;
 using NouteAPI.Features.Get;
 using NouteAPI.Models;
@@ -18,6 +19,13 @@ namespace NouteAPI.Features.Edit
             if (noute == null)
             {
                 throw new Exception($"Заметка с id {request.id} не найдена");
+            }
+            var existingNote = await db.nouteSet
+                .FirstOrDefaultAsync(a => a.lable == request.lable, cancellationToken);
+
+            if (existingNote != null)
+            {
+                return new EditNouteResponse(request.id, "Заметки не могут иметь одинаковые имена");
             }
 
             noute.date = DateTime.UtcNow;
