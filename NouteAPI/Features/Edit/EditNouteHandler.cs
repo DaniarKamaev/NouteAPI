@@ -20,16 +20,6 @@ namespace NouteAPI.Features.Edit
                 throw new Exception($"Заметка с id {request.id} не найдена");
             }
 
-            if (noute.lable == null)
-            {
-                throw new Exception($"Заметки нет имени");
-            }
-
-            if (noute.text == null)
-            {
-                throw new Exception($"Заметки нет текста");
-            }
-
             noute.date = DateTime.UtcNow;
             noute.lable = request.lable;
             noute.text = request.text;
